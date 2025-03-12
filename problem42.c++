@@ -11,22 +11,25 @@ string read_string(string messag){
 }
 
 string replace_word( string syntax , string rword , string nword){
-    string news , word ;
-    int pos ;
-    for (int i = 1; i < syntax.length(); i++)
+    string word , newstr ;
+    int pos = 0 ;
+    while ((pos = syntax.find(" ")) != string::npos)
     {
-        pos = (syntax.find(" ")) ;
-        word = (syntax.substr(0,pos)) ;
-        if (word == rword)
+        word = syntax.substr(0,pos) ;
+        if ( word == rword)
         {
             word = nword ;
         }
-        news += (word + " ") ;
-        syntax = syntax.erase(0,pos+1);
+        newstr += word + " ";
+        
+        syntax.erase(0 , pos + 1 ) ;
         
     }
-    news = news.erase(news.length());
-    return news ;
+    if (syntax == rword) {
+        syntax = nword;
+    }
+    newstr += syntax;
+    return newstr ;
 }
 
 int main(){
